@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+  <form id="add-product-form">
+    <div class="form-group">
+      <label for="image-input">Image:</label>
+      <input type="text" id="image" placeholder="Enter image URL">
+    </div>
+    <div class="form-group">
+      <label for="name-input">Name:</label>
+      <input type="text" id="name" placeholder="Enter product name">
+    </div>
+    <div class="form-group">
+      <label for="price-input">Price:</label>
+      <input type="number" id="price" placeholder="Enter product price">
+    </div>
+    <div class="form-group">
+      <label for="description-input">Description:</label>
+      <textarea id="description" rows="3" placeholder="Enter product description"></textarea>
+    </div>
+    <button class="btn btn-primary" id="submit-button">Add Product</button>
+  </form>  
+  <div class="cart-header">
+    <h2>Product list</h2>
+    <p class="number-of-products"></p>
+  </div>
+  <div id="product-container">
+    <!-- <div class="cart-header">
+      <h2>Product list</h2>
+      <p class="number-of-products"></p>
+    </div>
+    <div class="store-product">
+      <div class="product">
+        <img src="https://d2d22nphq0yz8t.cloudfront.net/28e5f6bd-9dca-449b-91c5-308b842f1e45/https://media.interflora.es/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/b/o/borabora-p0105.jpg/mxw_600,f_auto" 
+        alt="Item 3"
+        style="width: 150px; height: 150px">
+        <div class="product-details">
+          <h3 id="product-name">beauty plant</h3>
+          <p id="product-price">Price: $25</p>
+          <p id="product-description">thisnis on of the precious flowers from some part of the world. It's very special and smells like goodluck</p>
+          <button class="add-to-cart">Add to cart</button>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="cart-header">
+    <h2>Shopping Cart</h2>
+    <p>You have 3 items in your cart</p>
+  </div>
+  <div class="cart-container" id="cart-container">
+   
+  </div>
+  <div class="cart-summary">
+    <h3>Order Summary</h3>
+    <p>Subtotal: $75</p>
+    <p>Shipping: Free</p>
+    <p>Total: $75</p>
+    <button>Checkout</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
