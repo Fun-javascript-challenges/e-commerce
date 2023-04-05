@@ -6,6 +6,9 @@ We need to loop to be able to access each product and print it out on the screen
 
 let submitButton = document.getElementById("submit-button")
 let productContainer = document.getElementById("product-container")
+let notification = document.querySelector('.notification');
+let message = document.querySelector('.message');
+let close = document.querySelector('.close');
 
 submitButton.addEventListener("click", function(e){ 
     e.preventDefault();
@@ -57,7 +60,29 @@ submitButton.addEventListener("click", function(e){
         each product. creating a variable to get the value of each product object from the array containing them  */
         let index = parseInt(addCartButton.dataset.index)
         cartItem = productsList[index]
-        cart.push(cartItem);
+        if(cart.includes(cartItem)){          
+          message.innerHTML = 'Product already in cart!';
+          notification.classList.add("show-notification")
+          notification.style.display = 'flex';
+          
+          /* notification.addEventListener("click", function(event) {
+            if (event.target === close) {
+              notification.remove();
+            }
+          })
+
+          close.addEventListener("click", function() {
+            close.parentElement.remove()
+          }) */
+
+          setTimeout(function() {
+            notification.style.display = 'none';
+          }, 2000); // hide notification after 3 seconds
+        }
+        else{
+          cart.push(cartItem);
+        }
+       
         console.log("Product added to cart. This is the cart:", cart);
         /* cart.forEach(element => {
           console.log(cart[element])
