@@ -138,7 +138,7 @@ function removeCartItem(){
       document.getElementById(cartItemId).remove();
 
       console.log("remove pleaseee" +index) 
-      console.log("remove pleaseee cart lenth" +cart.length) 
+      console.log("remove pleaseee cart length" +cart.length) 
       orderSummary()
     })
   });
