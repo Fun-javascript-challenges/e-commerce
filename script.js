@@ -1,5 +1,7 @@
 let productsList = []
 let cart = []
+let totalPrice = 0
+let sum = 0
 /* The idea is create an object of all the values of the imput we'll need, initiate an empty
 array and push the product in it. As it's gonna be an array of list of objects( We can add lots of products)  
 We need to loop to be able to access each product and print it out on the screen. */
@@ -35,7 +37,7 @@ submitButton.addEventListener("click", function(e){
     
       <div data-index = ${index}class="store-product">
         <div class="product">
-          <img src="${product.image}" alt="Item 3" style="width: 150px; height: 150px">
+          <img src="${product.image}" alt="Item ${index}" style="width: 150px; height: 150px">
           <div class="product-details">
             <h3 id="product-name">${product.name}</h3>
             <p id="product-price">Price: ${product.price}</p>
@@ -83,11 +85,14 @@ submitButton.addEventListener("click", function(e){
           cart.push(cartItem);
         }
        
-        console.log("Product added to cart. This is the cart:", cart);
+        /* console.log("Product added to cart. This is the cart:", cart); */
         /* cart.forEach(element => {
           console.log(cart[element])
         }); */
+       
         renderCartItems()
+        removeCartItem()
+        clearCart()
 
       })
     });
@@ -96,13 +101,12 @@ submitButton.addEventListener("click", function(e){
 
 function renderCartItems(){
   let cartContainer = document.getElementById("cart-container")
-
   cartContainer.innerHTML = "";
   cart.forEach((cartProduct,index) => {
     cartContainer.innerHTML += `
-      <div class="cart-items">
+      <div class="cart-items" id="cart-item-${index}">
         <div class="item">
-          <img src="" alt="Item 1">
+          <img src="${cartProduct.image}" style="width: 150px; height: 150px alt="Item ${index}">
           <div class="item-details">
             <h3>${cartProduct.name}</h3>
             <p>Price: ${cartProduct.price}</p>
@@ -111,26 +115,81 @@ function renderCartItems(){
         </div>
       </div>
     `
-    removeCartItem()
-    console.log(index)
+   /*  console.log(index) */
   });
-
+  orderSummary() 
 }
 
 function removeCartItem(){
   let removeButtons = document.querySelectorAll(".remove-cart-item-button")
-  removeButtons.forEach(removeButton => {
-    removeButton.addEventListener("click", function(){
-      let index = parseInt(removeButton.dataset.index) 
+  removeButtons.forEach((removeButton, index) => {
+    removeButton.addEventListener("click", function(e){
+      e.preventDefault()
+
+      /* this method gets the closest element to the button.  In this case, this.closest(".cart-items") returns the closest ancestor element of the clicked button 
+      that has a cart-items class, and the .id property is used to get the value of its id attribute. */
+
+      let cartItemId = this.closest(".cart-items").id;
+
+      /* in the code beloww we're replacing cart-item- with an empty string so the only thing left is the index
+      number  */
+      let index = parseInt(cartItemId.replace("cart-item-", ""));
       cart.splice(index, 1)
-      this.parentNode.parentNode.remove()
-      console.log(index)
+      document.getElementById(cartItemId).remove();
+
+      console.log("remove pleaseee" +index) 
+      console.log("remove pleaseee cart lenth" +cart.length) 
+      orderSummary()
     })
   });
   
 }
 
+function orderSummary(){
+  let total = document.getElementById('cart-total');
+  let cartContainer = document.getElementById("cart-container")
+  
+   /*  console.log(cartelement.price) */
+   /* console.log(allPrices) */
+   /* totalPrice += allPrices
+   console.log(totalPrice) */
 
+
+   /*  To sum up the prices, we use the reduce method, which takes a callback function that is called on each 
+   element of the array. The callback function takes two arguments, the accumulator, whch is the sum of all the 
+   additions it's been doing to each price in the array of obj and the current value. 
+   Basically, detect a new price and withh the cur and  */
+   if(cart.length > 0){
+    sum = cart.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.price), 0);
+    total.innerHTML = "You have products worth " + sum + "€"
+   }
+   else{
+    sum = 0
+    total.innerHTML = "You have products worth " + 0 + "€"
+    cartContainer.innerHTML = "Your cart is empty!"
+    cartContainer.style.textAlign = "center"
+    cartContainer.style.display="inherit"
+   }
+  
+   console.log(sum);
+   console.log("cart from order summary" + cart)
+   let cartItemCounter = document.getElementById("cart-item-counter")  
+   cartItemCounter.innerHTML = "You have " + cart.length + " items in your cart"
+}
+
+function clearCart(){
+  let clear = document.getElementById('clear-all-cart');
+   clear.addEventListener("click", function(){
+    cart.splice(0, cart.length);
+    console.log(cart)
+    let cartContainer = document.getElementById("cart-container")
+    cartContainer.innerHTML = "Your cart is empty!"
+    cartContainer.style.textAlign = "center"
+    cartContainer.style.display="inherit"
+    sum= 0
+    orderSummary()
+   })
+}
 
 
   
