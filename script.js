@@ -40,7 +40,7 @@ submitButton.addEventListener("click", function(e){
           <img src="${product.image}" alt="Item ${index}" style="width: 150px; height: 150px">
           <div class="product-details">
             <h3 id="product-name">${product.name}</h3>
-            <p id="product-price">Price: ${product.price}</p>
+            <p id="product-price">Price: ${product.price}€</p>
             <p id="product-description">${product.description}</p>
             <button data-index="${index}" class="add-to-cart">Add to cart</button>
           </div>
@@ -109,7 +109,7 @@ function renderCartItems(){
           <img src="${cartProduct.image}" style="width: 150px; height: 150px alt="Item ${index}">
           <div class="item-details">
             <h3>${cartProduct.name}</h3>
-            <p>Price: ${cartProduct.price}</p>
+            <p>Price: ${cartProduct.price}€</p>
             <button data-index = ${index} class="remove-cart-item-button">Remove</button>
           </div>
         </div>
